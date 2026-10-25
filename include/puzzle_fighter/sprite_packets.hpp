@@ -69,7 +69,7 @@ template<class M> struct Composer {
         origin=saved;body(a);origin={SpritePacketGroup::attachment,0,a&0xffffff};
         const auto after=m.read_word(a+0x36);if(after&&visible(pointer(after)))body(pointer(after));origin=saved;
     }
-    void layer(unsigned n){origin={SpritePacketGroup::first_pool,0,0};const auto count=m.read_byte(g+0x5820+n),base=g+0x58ceu+n*0x40;for(unsigned i=0;i<count;++i)attached(pointer(m.read_word(base-2-2*i)));}
+    void layer(unsigned n){origin={SpritePacketGroup::first_pool,0,0};const auto count=m.read_byte(g+0x5820+n);const auto base=g+0x58ceu+n*0x40;for(unsigned i=0;i<count;++i)attached(pointer(m.read_word(base-2-2*i)));}
     void shadows(){
         if(m.read_byte(g+0x125))return;
         for(auto a:{g+0xc00,g+0xb00}){if(!visible(a))continue;const auto index=m.read_byte(m.read_long(a+0x1c)+0xe);if(!index)continue;

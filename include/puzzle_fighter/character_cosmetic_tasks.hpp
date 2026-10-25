@@ -67,7 +67,7 @@ template<class M,class H> bool character_attachment_task(std::uint32_t a,std::ui
  }
  if(kind==1){
   m.write_byte(a+1,m.read_byte(p+1));if(m.read_byte(p+0x82)!=5){next();return true;}
-  const auto parent_phase=m.read_byte(p+5),phase=parent_phase==0xa?2:parent_phase;
+  const auto parent_phase=m.read_byte(p+5);const auto phase=parent_phase==0xa?2:parent_phase;
   if((parent_phase==0||parent_phase==2||parent_phase==4||parent_phase==6||parent_phase==8||parent_phase==0xa)&&phase!=m.read_byte(a+5))m.write_long(a+4,0x02000000u|(std::uint32_t(phase)<<16));
   const auto mode=m.read_byte(a+5);if(mode>8||(mode&1))return false;
   if(!mode&&m.read_byte(g+0x12a)){next();return true;}
